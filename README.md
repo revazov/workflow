@@ -1,2 +1,2 @@
 # workflow
-app to control employee
+app to control employee workflow
