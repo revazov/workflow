@@ -15,7 +15,7 @@ ApplicationWindow {
 
         Page {
             Label {
-                text: qsTr("FIRST page")
+                text: qsTr("FIRSTq page")
                 anchors.centerIn: parent
             }
         }
