@@ -5,6 +5,7 @@
 #include <QSqlQuery>
 #include <QSettings>
 #include "usermodel.h"
+#include "missiomodel.h"
 
 bool createTables(QSqlDatabase &db)
 {
@@ -22,7 +23,7 @@ bool createTables(QSqlDatabase &db)
 
     //Mission table
     isSuccess &= query.exec("create table if not exists mission"
-                            "(id int primary key, user_id int, start_date text, end_date text, last_action_time text, finished int);");
+                            "(id int primary key, name text, user_id int, start_date text, end_date text, last_action_date text, finished int);");
 
     return isSuccess;
 
@@ -54,15 +55,21 @@ int main(int argc, char *argv[])
     createTables(db);
 
     UserModel userModel(db);
-    UserModel::User user;
-    user.id = 2;
-    user.fName = "Test";
-    user.lName = "Testsson";
-    userModel.addUser(user);
+//    User user;
+//    user.id = 2;
+//    user.fName = "Test";
+//    user.lName = "Testsson";
+//    userModel.addUser(user);
+//    userModel.removeUserId(user.id);
+
+    MissioModel missionModel(db);
+//    Mission mission;
+//    qDebug() << mission.start_date;
 
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+
 
     return app.exec();
 }
