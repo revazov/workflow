@@ -8,15 +8,15 @@
 #include <QSqlQuery>
 #include <QMetaClassInfo>
 #include <QDebug>
-#include <QDate>
+#include <QDateTime>
 
 struct Mission{
     unsigned int id = 0;
     QString name = "";
     unsigned int user_id = 0;
-    QString start_date = QDate::currentDate().toString("yyyy-MM-dd");
-    QString end_date = QDate::currentDate().toString("yyyy-MM-dd");
-    QString last_action_date = QDate::currentDate().toString("yyyy-MM-dd");
+    QString start_date = QDateTime::currentDateTime().toString("yyyy-MM-dd | HH-mm");
+    QString end_date = QDateTime::currentDateTime().toString("yyyy-MM-dd | HH-mm");
+    QString last_action_date = QDateTime::currentDateTime().toString("yyyy-MM-dd | HH-mm");
     bool finished = false;
 
 };
@@ -38,6 +38,11 @@ signals:
     void error(QString);
 
 public slots:
+
+    // QAbstractItemModel interface
+public:
+    QHash<int, QByteArray> roleNames() const;
+    QVariant data(const QModelIndex &index, int role) const;
 };
 
 #endif // MISSIOMODEL_H

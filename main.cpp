@@ -4,9 +4,10 @@
 #include <QDebug>
 #include <QSqlQuery>
 #include <QSettings>
+#include <QQmlContext>
 #include "usermodel.h"
 #include "missiomodel.h"
-
+#include <QColor>
 bool createTables(QSqlDatabase &db)
 {
     bool isSuccess = true;
@@ -63,13 +64,23 @@ int main(int argc, char *argv[])
 //    userModel.removeUserId(user.id);
 
     MissioModel missionModel(db);
-//    Mission mission;
-//    qDebug() << mission.start_date;
+    Mission mission;
+    mission.id = 1;
+    mission.user_id = 1;
+    mission.name = "first";
+    missionModel.addMission(mission);
+    mission.id = 2;
+    mission.user_id = 76;
+    mission.name = "second";
+    mission.end_date = QDateTime::fromString("2016-12-30 | 12-00", "yyyy-MM-dd | HH-mm").toString("yyyy-MM-dd | HH-mm");
+    missionModel.addMission(mission);
+    //qDebug() << QColor::colorNames();
 
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
+    engine.rootContext()->setContextProperty("missionModel", &missionModel);
 
     return app.exec();
 }

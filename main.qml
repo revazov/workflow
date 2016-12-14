@@ -14,9 +14,14 @@ ApplicationWindow {
         currentIndex: tabBar.currentIndex
 
         Page {
-            Label {
-                text: qsTr("FIRSTq page")
-                anchors.centerIn: parent
+            ListView{
+                id: missionView
+                anchors.fill: parent
+                anchors.margins: 5
+                model: missionModel
+                delegate:
+                              MissionDelegate{
+                }
             }
         }
 
