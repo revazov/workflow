@@ -5,6 +5,7 @@ Rectangle{
     id: wrapper
     property bool isActive: false
     property bool isEditable: false
+    signal wrapperClicked
     width: 300
     height: 100
     color: "white"
@@ -58,16 +59,20 @@ Rectangle{
         anchors.fill: parent
         propagateComposedEvents: true
         hoverEnabled: true
+        acceptedButtons: Qt.AllButtons
         onEntered: {
             isActive = true;
         }
         onExited: {isActive = false}
-        onClicked: mouse.accepted = false;
-        onPressed: mouse.accepted = false;
-        onReleased: mouse.accepted = false;
-        onDoubleClicked: mouse.accepted = false;
-        onPositionChanged: mouse.accepted = false;
-        onPressAndHold: mouse.accepted = false;
+        onClicked: {
+            wrapperClicked()
+            mouse.accepted = true
+        }
+//        onPressed: mouse.accepted = false;
+//        onReleased: mouse.accepted = false;
+//        onDoubleClicked: mouse.accepted = false;
+//        onPositionChanged: mouse.accepted = false;
+//        onPressAndHold: mouse.accepted = false;
         z: 4
 
     }
